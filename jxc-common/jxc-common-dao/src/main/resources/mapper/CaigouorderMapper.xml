@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zb.mapper.CaigouorderMapper">
+
+    <select id="getCaigouorderById" resultType="com.zb.pojo.Caigouorder">
+        select
+                orderID as orderID,
+                supplierID as supplierID,
+                orderDate as orderDate,
+                deliverDate as deliverDate,
+                monetary as monetary,
+                buyerID as buyerID,
+                POD as POD,
+                others as others,
+                operatorID as operatorID,
+                examinerID as examinerID,
+                examineState as examineState,
+                deal as deal
+        from caigouorder
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getCaigouorderListByMap" resultType="com.zb.pojo.Caigouorder" parameterType="java.util.Map">
+        select
+                orderID as orderID,
+                supplierID as supplierID,
+                orderDate as orderDate,
+                deliverDate as deliverDate,
+                monetary as monetary,
+                buyerID as buyerID,
+                POD as POD,
+                others as others,
+                operatorID as operatorID,
+                examinerID as examinerID,
+                examineState as examineState,
+                deal as deal
+        from caigouorder
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="orderID != null and orderID!=''">
+                    and orderID=#{orderID}
+                </if>
+                <if test="supplierID != null and supplierID!=''">
+                    and supplierID=#{supplierID}
+                </if>
+                <if test="orderDate != null and orderDate!=''">
+                    and orderDate=#{orderDate}
+                </if>
+                <if test="deliverDate != null and deliverDate!=''">
+                    and deliverDate=#{deliverDate}
+                </if>
+                <if test="monetary != null and monetary!=''">
+                    and monetary=#{monetary}
+                </if>
+                <if test="buyerID != null and buyerID!=''">
+                    and buyerID=#{buyerID}
+                </if>
+                <if test="POD != null and POD!=''">
+                    and POD=#{POD}
+                </if>
+                <if test="others != null and others!=''">
+                    and others=#{others}
+                </if>
+                <if test="operatorID != null and operatorID!=''">
+                    and operatorID=#{operatorID}
+                </if>
+                <if test="examinerID != null and examinerID!=''">
+                    and examinerID=#{examinerID}
+                </if>
+                <if test="examineState != null and examineState!=''">
+                    and examineState=#{examineState}
+                </if>
+                <if test="deal != null and deal!=''">
+                    and deal=#{deal}
+                </if>
+        </trim>
+        <if test="beginPos != null and pageSize != null ">
+            limit #{beginPos},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getCaigouorderCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from caigouorder
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="orderID != null and orderID!=''">
+                    and orderID=#{orderID}
+                </if>
+                <if test="supplierID != null and supplierID!=''">
+                    and supplierID=#{supplierID}
+                </if>
+                <if test="orderDate != null and orderDate!=''">
+                    and orderDate=#{orderDate}
+                </if>
+                <if test="deliverDate != null and deliverDate!=''">
+                    and deliverDate=#{deliverDate}
+                </if>
+                <if test="monetary != null and monetary!=''">
+                    and monetary=#{monetary}
+                </if>
+                <if test="buyerID != null and buyerID!=''">
+                    and buyerID=#{buyerID}
+                </if>
+                <if test="POD != null and POD!=''">
+                    and POD=#{POD}
+                </if>
+                <if test="others != null and others!=''">
+                    and others=#{others}
+                </if>
+                <if test="operatorID != null and operatorID!=''">
+                    and operatorID=#{operatorID}
+                </if>
+                <if test="examinerID != null and examinerID!=''">
+                    and examinerID=#{examinerID}
+                </if>
+                <if test="examineState != null and examineState!=''">
+                    and examineState=#{examineState}
+                </if>
+                <if test="deal != null and deal!=''">
+                    and deal=#{deal}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertCaigouorder" parameterType="com.zb.pojo.Caigouorder">
+        insert into caigouorder(
+                        orderID,
+                        supplierID,
+                        orderDate,
+                        deliverDate,
+                        monetary,
+                        buyerID,
+                        POD,
+                        others,
+                        operatorID,
+                        examinerID,
+                        examineState,
+                        deal)
+        values(
+                     #{orderID},
+                     #{supplierID},
+                     #{orderDate},
+                     #{deliverDate},
+                     #{monetary},
+                     #{buyerID},
+                     #{POD},
+                     #{others},
+                     #{operatorID},
+                     #{examinerID},
+                     #{examineState},
+                    #{deal})
+    </insert>
+
+    <update id="updateCaigouorder" parameterType="com.zb.pojo.Caigouorder">
+        update caigouorder
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+                        <if test="orderID != null and orderID!=''">
+                            orderID=#{orderID},
+                        </if>
+                        <if test="supplierID != null and supplierID!=''">
+                            supplierID=#{supplierID},
+                        </if>
+                        <if test="orderDate != null and orderDate!=''">
+                            orderDate=#{orderDate},
+                        </if>
+                        <if test="deliverDate != null and deliverDate!=''">
+                            deliverDate=#{deliverDate},
+                        </if>
+                        <if test="monetary != null and monetary!=''">
+                            monetary=#{monetary},
+                        </if>
+                        <if test="buyerID != null and buyerID!=''">
+                            buyerID=#{buyerID},
+                        </if>
+                        <if test="POD != null and POD!=''">
+                            POD=#{POD},
+                        </if>
+                        <if test="others != null and others!=''">
+                            others=#{others},
+                        </if>
+                        <if test="operatorID != null and operatorID!=''">
+                            operatorID=#{operatorID},
+                        </if>
+                        <if test="examinerID != null and examinerID!=''">
+                            examinerID=#{examinerID},
+                        </if>
+                        <if test="examineState != null and examineState!=''">
+                            examineState=#{examineState},
+                        </if>
+                        <if test="deal != null and deal!=''">
+                            deal=#{deal}
+                        </if>
+        </trim>
+    </update>
+</mapper>

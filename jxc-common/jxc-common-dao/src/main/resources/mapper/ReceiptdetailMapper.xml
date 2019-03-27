@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zb.mapper.ReceiptdetailMapper">
+
+    <select id="getReceiptdetailById" resultType="com.zb.pojo.Receiptdetail">
+        select
+                id as id,
+                receiptId as receiptId,
+                tMoney as tMoney
+        from receiptdetail
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getReceiptdetailListByMap" resultType="com.zb.pojo.Receiptdetail" parameterType="java.util.Map">
+        select
+                id as id,
+                receiptId as receiptId,
+                tMoney as tMoney
+        from receiptdetail
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="receiptId != null and receiptId!=''">
+                    and receiptId=#{receiptId}
+                </if>
+                <if test="tMoney != null and tMoney!=''">
+                    and tMoney=#{tMoney}
+                </if>
+        </trim>
+        <if test="beginPos != null and pageSize != null ">
+            limit #{beginPos},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getReceiptdetailCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from receiptdetail
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="receiptId != null and receiptId!=''">
+                    and receiptId=#{receiptId}
+                </if>
+                <if test="tMoney != null and tMoney!=''">
+                    and tMoney=#{tMoney}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertReceiptdetail" parameterType="com.zb.pojo.Receiptdetail">
+        insert into receiptdetail(
+                        receiptId,
+                        tMoney)
+        values(
+                     #{receiptId},
+                    #{tMoney})
+    </insert>
+
+    <update id="updateReceiptdetail" parameterType="com.zb.pojo.Receiptdetail">
+        update receiptdetail
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+                        <if test="receiptId != null and receiptId!=''">
+                            receiptId=#{receiptId},
+                        </if>
+                        <if test="tMoney != null and tMoney!=''">
+                            tMoney=#{tMoney}
+                        </if>
+        </trim>
+    </update>
+</mapper>

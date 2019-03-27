@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zb.mapper.OrdersMapper">
+
+    <select id="getOrdersById" resultType="com.zb.pojo.Orders">
+        select
+                id as id,
+                orderTime as orderTime,
+                kh as kh,
+                money as money,
+                sellId as sellId,
+                sellTime as sellTime,
+                pay as pay,
+                address as address,
+                note as note,
+                finish as finish,
+                op as op,
+                shr as shr,
+                sh as sh
+        from orders
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getOrdersListByMap" resultType="com.zb.pojo.Orders" parameterType="java.util.Map">
+        select
+                id as id,
+                orderTime as orderTime,
+                kh as kh,
+                money as money,
+                sellId as sellId,
+                sellTime as sellTime,
+                pay as pay,
+                address as address,
+                note as note,
+                finish as finish,
+                op as op,
+                shr as shr,
+                sh as sh
+        from orders
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="orderTime != null and orderTime!=''">
+                    and orderTime=#{orderTime}
+                </if>
+                <if test="kh != null and kh!=''">
+                    and kh=#{kh}
+                </if>
+                <if test="money != null and money!=''">
+                    and money=#{money}
+                </if>
+                <if test="sellId != null and sellId!=''">
+                    and sellId=#{sellId}
+                </if>
+                <if test="sellTime != null and sellTime!=''">
+                    and sellTime=#{sellTime}
+                </if>
+                <if test="pay != null and pay!=''">
+                    and pay=#{pay}
+                </if>
+                <if test="address != null and address!=''">
+                    and address=#{address}
+                </if>
+                <if test="note != null and note!=''">
+                    and note=#{note}
+                </if>
+                <if test="finish != null and finish!=''">
+                    and finish=#{finish}
+                </if>
+                <if test="op != null and op!=''">
+                    and op=#{op}
+                </if>
+                <if test="shr != null and shr!=''">
+                    and shr=#{shr}
+                </if>
+                <if test="sh != null and sh!=''">
+                    and sh=#{sh}
+                </if>
+        </trim>
+        <if test="beginPos != null and pageSize != null ">
+            limit #{beginPos},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getOrdersCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from orders
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="orderTime != null and orderTime!=''">
+                    and orderTime=#{orderTime}
+                </if>
+                <if test="kh != null and kh!=''">
+                    and kh=#{kh}
+                </if>
+                <if test="money != null and money!=''">
+                    and money=#{money}
+                </if>
+                <if test="sellId != null and sellId!=''">
+                    and sellId=#{sellId}
+                </if>
+                <if test="sellTime != null and sellTime!=''">
+                    and sellTime=#{sellTime}
+                </if>
+                <if test="pay != null and pay!=''">
+                    and pay=#{pay}
+                </if>
+                <if test="address != null and address!=''">
+                    and address=#{address}
+                </if>
+                <if test="note != null and note!=''">
+                    and note=#{note}
+                </if>
+                <if test="finish != null and finish!=''">
+                    and finish=#{finish}
+                </if>
+                <if test="op != null and op!=''">
+                    and op=#{op}
+                </if>
+                <if test="shr != null and shr!=''">
+                    and shr=#{shr}
+                </if>
+                <if test="sh != null and sh!=''">
+                    and sh=#{sh}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertOrders" parameterType="com.zb.pojo.Orders">
+        insert into orders(
+                        orderTime,
+                        kh,
+                        money,
+                        sellId,
+                        sellTime,
+                        pay,
+                        address,
+                        note,
+                        finish,
+                        op,
+                        shr,
+                        sh)
+        values(
+                     #{orderTime},
+                     #{kh},
+                     #{money},
+                     #{sellId},
+                     #{sellTime},
+                     #{pay},
+                     #{address},
+                     #{note},
+                     #{finish},
+                     #{op},
+                     #{shr},
+                    #{sh})
+    </insert>
+
+    <update id="updateOrders" parameterType="com.zb.pojo.Orders">
+        update orders
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+                        <if test="orderTime != null and orderTime!=''">
+                            orderTime=#{orderTime},
+                        </if>
+                        <if test="kh != null and kh!=''">
+                            kh=#{kh},
+                        </if>
+                        <if test="money != null and money!=''">
+                            money=#{money},
+                        </if>
+                        <if test="sellId != null and sellId!=''">
+                            sellId=#{sellId},
+                        </if>
+                        <if test="sellTime != null and sellTime!=''">
+                            sellTime=#{sellTime},
+                        </if>
+                        <if test="pay != null and pay!=''">
+                            pay=#{pay},
+                        </if>
+                        <if test="address != null and address!=''">
+                            address=#{address},
+                        </if>
+                        <if test="note != null and note!=''">
+                            note=#{note},
+                        </if>
+                        <if test="finish != null and finish!=''">
+                            finish=#{finish},
+                        </if>
+                        <if test="op != null and op!=''">
+                            op=#{op},
+                        </if>
+                        <if test="shr != null and shr!=''">
+                            shr=#{shr},
+                        </if>
+                        <if test="sh != null and sh!=''">
+                            sh=#{sh}
+                        </if>
+        </trim>
+    </update>
+</mapper>

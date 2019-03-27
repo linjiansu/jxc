@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zb.mapper.CkinfoMapper">
+
+    <select id="getCkinfoById" resultType="com.zb.pojo.Ckinfo">
+        select
+                ckId as ckId,
+                ckname as ckname,
+                chargeid as chargeid
+        from ckinfo
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getCkinfoListByMap" resultType="com.zb.pojo.Ckinfo" parameterType="java.util.Map">
+        select
+                ckId as ckId,
+                ckname as ckname,
+                chargeid as chargeid
+        from ckinfo
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="ckId != null and ckId!=''">
+                    and ckId=#{ckId}
+                </if>
+                <if test="ckname != null and ckname!=''">
+                    and ckname=#{ckname}
+                </if>
+                <if test="chargeid != null and chargeid!=''">
+                    and chargeid=#{chargeid}
+                </if>
+        </trim>
+        <if test="beginPos != null and pageSize != null ">
+            limit #{beginPos},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getCkinfoCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from ckinfo
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="ckId != null and ckId!=''">
+                    and ckId=#{ckId}
+                </if>
+                <if test="ckname != null and ckname!=''">
+                    and ckname=#{ckname}
+                </if>
+                <if test="chargeid != null and chargeid!=''">
+                    and chargeid=#{chargeid}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertCkinfo" parameterType="com.zb.pojo.Ckinfo">
+        insert into ckinfo(
+                        ckId,
+                        ckname,
+                        chargeid)
+        values(
+                     #{ckId},
+                     #{ckname},
+                    #{chargeid})
+    </insert>
+
+    <update id="updateCkinfo" parameterType="com.zb.pojo.Ckinfo">
+        update ckinfo
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+                        <if test="ckId != null and ckId!=''">
+                            ckId=#{ckId},
+                        </if>
+                        <if test="ckname != null and ckname!=''">
+                            ckname=#{ckname},
+                        </if>
+                        <if test="chargeid != null and chargeid!=''">
+                            chargeid=#{chargeid}
+                        </if>
+        </trim>
+    </update>
+</mapper>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zb.mapper.QuoteMapper">
+
+    <select id="getQuoteById" resultType="com.zb.pojo.Quote">
+        select
+                id as id,
+                qDate as qDate,
+                kh as kh,
+                bjr as bjr,
+                money as money,
+                op as op,
+                note as note
+        from quote
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getQuoteListByMap" resultType="com.zb.pojo.Quote" parameterType="java.util.Map">
+        select
+                id as id,
+                qDate as qDate,
+                kh as kh,
+                bjr as bjr,
+                money as money,
+                op as op,
+                note as note
+        from quote
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="qDate != null and qDate!=''">
+                    and qDate=#{qDate}
+                </if>
+                <if test="kh != null and kh!=''">
+                    and kh=#{kh}
+                </if>
+                <if test="bjr != null and bjr!=''">
+                    and bjr=#{bjr}
+                </if>
+                <if test="money != null and money!=''">
+                    and money=#{money}
+                </if>
+                <if test="op != null and op!=''">
+                    and op=#{op}
+                </if>
+                <if test="note != null and note!=''">
+                    and note=#{note}
+                </if>
+        </trim>
+        <if test="beginPos != null and pageSize != null ">
+            limit #{beginPos},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getQuoteCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from quote
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="qDate != null and qDate!=''">
+                    and qDate=#{qDate}
+                </if>
+                <if test="kh != null and kh!=''">
+                    and kh=#{kh}
+                </if>
+                <if test="bjr != null and bjr!=''">
+                    and bjr=#{bjr}
+                </if>
+                <if test="money != null and money!=''">
+                    and money=#{money}
+                </if>
+                <if test="op != null and op!=''">
+                    and op=#{op}
+                </if>
+                <if test="note != null and note!=''">
+                    and note=#{note}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertQuote" parameterType="com.zb.pojo.Quote">
+        insert into quote(
+                        qDate,
+                        kh,
+                        bjr,
+                        money,
+                        op,
+                        note)
+        values(
+                     #{qDate},
+                     #{kh},
+                     #{bjr},
+                     #{money},
+                     #{op},
+                    #{note})
+    </insert>
+
+    <update id="updateQuote" parameterType="com.zb.pojo.Quote">
+        update quote
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+                        <if test="qDate != null and qDate!=''">
+                            qDate=#{qDate},
+                        </if>
+                        <if test="kh != null and kh!=''">
+                            kh=#{kh},
+                        </if>
+                        <if test="bjr != null and bjr!=''">
+                            bjr=#{bjr},
+                        </if>
+                        <if test="money != null and money!=''">
+                            money=#{money},
+                        </if>
+                        <if test="op != null and op!=''">
+                            op=#{op},
+                        </if>
+                        <if test="note != null and note!=''">
+                            note=#{note}
+                        </if>
+        </trim>
+    </update>
+</mapper>

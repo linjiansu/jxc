@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zb.mapper.CaigoureturnedMapper">
+
+    <select id="getCaigoureturnedById" resultType="com.zb.pojo.Caigoureturned">
+        select
+                returnedID as returnedID,
+                supplierID as supplierID,
+                monetary as monetary,
+                billID as billID,
+                returnedDate as returnedDate,
+                shipperID as shipperID,
+                operatorID as operatorID,
+                enterDate as enterDate,
+                opmanID as opmanID,
+                opDate as opDate,
+                examinerID as examinerID,
+                examineDate as examineDate,
+                others as others,
+                examineState as examineState
+        from caigoureturned
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getCaigoureturnedListByMap" resultType="com.zb.pojo.Caigoureturned" parameterType="java.util.Map">
+        select
+                returnedID as returnedID,
+                supplierID as supplierID,
+                monetary as monetary,
+                billID as billID,
+                returnedDate as returnedDate,
+                shipperID as shipperID,
+                operatorID as operatorID,
+                enterDate as enterDate,
+                opmanID as opmanID,
+                opDate as opDate,
+                examinerID as examinerID,
+                examineDate as examineDate,
+                others as others,
+                examineState as examineState
+        from caigoureturned
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="returnedID != null and returnedID!=''">
+                    and returnedID=#{returnedID}
+                </if>
+                <if test="supplierID != null and supplierID!=''">
+                    and supplierID=#{supplierID}
+                </if>
+                <if test="monetary != null and monetary!=''">
+                    and monetary=#{monetary}
+                </if>
+                <if test="billID != null and billID!=''">
+                    and billID=#{billID}
+                </if>
+                <if test="returnedDate != null and returnedDate!=''">
+                    and returnedDate=#{returnedDate}
+                </if>
+                <if test="shipperID != null and shipperID!=''">
+                    and shipperID=#{shipperID}
+                </if>
+                <if test="operatorID != null and operatorID!=''">
+                    and operatorID=#{operatorID}
+                </if>
+                <if test="enterDate != null and enterDate!=''">
+                    and enterDate=#{enterDate}
+                </if>
+                <if test="opmanID != null and opmanID!=''">
+                    and opmanID=#{opmanID}
+                </if>
+                <if test="opDate != null and opDate!=''">
+                    and opDate=#{opDate}
+                </if>
+                <if test="examinerID != null and examinerID!=''">
+                    and examinerID=#{examinerID}
+                </if>
+                <if test="examineDate != null and examineDate!=''">
+                    and examineDate=#{examineDate}
+                </if>
+                <if test="others != null and others!=''">
+                    and others=#{others}
+                </if>
+                <if test="examineState != null and examineState!=''">
+                    and examineState=#{examineState}
+                </if>
+        </trim>
+        <if test="beginPos != null and pageSize != null ">
+            limit #{beginPos},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getCaigoureturnedCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from caigoureturned
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="returnedID != null and returnedID!=''">
+                    and returnedID=#{returnedID}
+                </if>
+                <if test="supplierID != null and supplierID!=''">
+                    and supplierID=#{supplierID}
+                </if>
+                <if test="monetary != null and monetary!=''">
+                    and monetary=#{monetary}
+                </if>
+                <if test="billID != null and billID!=''">
+                    and billID=#{billID}
+                </if>
+                <if test="returnedDate != null and returnedDate!=''">
+                    and returnedDate=#{returnedDate}
+                </if>
+                <if test="shipperID != null and shipperID!=''">
+                    and shipperID=#{shipperID}
+                </if>
+                <if test="operatorID != null and operatorID!=''">
+                    and operatorID=#{operatorID}
+                </if>
+                <if test="enterDate != null and enterDate!=''">
+                    and enterDate=#{enterDate}
+                </if>
+                <if test="opmanID != null and opmanID!=''">
+                    and opmanID=#{opmanID}
+                </if>
+                <if test="opDate != null and opDate!=''">
+                    and opDate=#{opDate}
+                </if>
+                <if test="examinerID != null and examinerID!=''">
+                    and examinerID=#{examinerID}
+                </if>
+                <if test="examineDate != null and examineDate!=''">
+                    and examineDate=#{examineDate}
+                </if>
+                <if test="others != null and others!=''">
+                    and others=#{others}
+                </if>
+                <if test="examineState != null and examineState!=''">
+                    and examineState=#{examineState}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertCaigoureturned" parameterType="com.zb.pojo.Caigoureturned">
+        insert into caigoureturned(
+                        returnedID,
+                        supplierID,
+                        monetary,
+                        billID,
+                        returnedDate,
+                        shipperID,
+                        operatorID,
+                        enterDate,
+                        opmanID,
+                        opDate,
+                        examinerID,
+                        examineDate,
+                        others,
+                        examineState)
+        values(
+                     #{returnedID},
+                     #{supplierID},
+                     #{monetary},
+                     #{billID},
+                     #{returnedDate},
+                     #{shipperID},
+                     #{operatorID},
+                     #{enterDate},
+                     #{opmanID},
+                     #{opDate},
+                     #{examinerID},
+                     #{examineDate},
+                     #{others},
+                    #{examineState})
+    </insert>
+
+    <update id="updateCaigoureturned" parameterType="com.zb.pojo.Caigoureturned">
+        update caigoureturned
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+                        <if test="returnedID != null and returnedID!=''">
+                            returnedID=#{returnedID},
+                        </if>
+                        <if test="supplierID != null and supplierID!=''">
+                            supplierID=#{supplierID},
+                        </if>
+                        <if test="monetary != null and monetary!=''">
+                            monetary=#{monetary},
+                        </if>
+                        <if test="billID != null and billID!=''">
+                            billID=#{billID},
+                        </if>
+                        <if test="returnedDate != null and returnedDate!=''">
+                            returnedDate=#{returnedDate},
+                        </if>
+                        <if test="shipperID != null and shipperID!=''">
+                            shipperID=#{shipperID},
+                        </if>
+                        <if test="operatorID != null and operatorID!=''">
+                            operatorID=#{operatorID},
+                        </if>
+                        <if test="enterDate != null and enterDate!=''">
+                            enterDate=#{enterDate},
+                        </if>
+                        <if test="opmanID != null and opmanID!=''">
+                            opmanID=#{opmanID},
+                        </if>
+                        <if test="opDate != null and opDate!=''">
+                            opDate=#{opDate},
+                        </if>
+                        <if test="examinerID != null and examinerID!=''">
+                            examinerID=#{examinerID},
+                        </if>
+                        <if test="examineDate != null and examineDate!=''">
+                            examineDate=#{examineDate},
+                        </if>
+                        <if test="others != null and others!=''">
+                            others=#{others},
+                        </if>
+                        <if test="examineState != null and examineState!=''">
+                            examineState=#{examineState}
+                        </if>
+        </trim>
+    </update>
+</mapper>

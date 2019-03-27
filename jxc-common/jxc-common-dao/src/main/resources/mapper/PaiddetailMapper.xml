@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zb.mapper.PaiddetailMapper">
+
+    <select id="getPaiddetailById" resultType="com.zb.pojo.Paiddetail">
+        select
+                paidDetailID as paidDetailID,
+                paidID as paidID,
+                orderID as orderID,
+                curPay as curPay
+        from paiddetail
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getPaiddetailListByMap" resultType="com.zb.pojo.Paiddetail" parameterType="java.util.Map">
+        select
+                paidDetailID as paidDetailID,
+                paidID as paidID,
+                orderID as orderID,
+                curPay as curPay
+        from paiddetail
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="paidDetailID != null and paidDetailID!=''">
+                    and paidDetailID=#{paidDetailID}
+                </if>
+                <if test="paidID != null and paidID!=''">
+                    and paidID=#{paidID}
+                </if>
+                <if test="orderID != null and orderID!=''">
+                    and orderID=#{orderID}
+                </if>
+                <if test="curPay != null and curPay!=''">
+                    and curPay=#{curPay}
+                </if>
+        </trim>
+        <if test="beginPos != null and pageSize != null ">
+            limit #{beginPos},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getPaiddetailCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from paiddetail
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="paidDetailID != null and paidDetailID!=''">
+                    and paidDetailID=#{paidDetailID}
+                </if>
+                <if test="paidID != null and paidID!=''">
+                    and paidID=#{paidID}
+                </if>
+                <if test="orderID != null and orderID!=''">
+                    and orderID=#{orderID}
+                </if>
+                <if test="curPay != null and curPay!=''">
+                    and curPay=#{curPay}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertPaiddetail" parameterType="com.zb.pojo.Paiddetail">
+        insert into paiddetail(
+                        paidDetailID,
+                        paidID,
+                        orderID,
+                        curPay)
+        values(
+                     #{paidDetailID},
+                     #{paidID},
+                     #{orderID},
+                    #{curPay})
+    </insert>
+
+    <update id="updatePaiddetail" parameterType="com.zb.pojo.Paiddetail">
+        update paiddetail
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+                        <if test="paidDetailID != null and paidDetailID!=''">
+                            paidDetailID=#{paidDetailID},
+                        </if>
+                        <if test="paidID != null and paidID!=''">
+                            paidID=#{paidID},
+                        </if>
+                        <if test="orderID != null and orderID!=''">
+                            orderID=#{orderID},
+                        </if>
+                        <if test="curPay != null and curPay!=''">
+                            curPay=#{curPay}
+                        </if>
+        </trim>
+    </update>
+</mapper>

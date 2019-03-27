@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zb.mapper.CaigouplanMapper">
+
+    <select id="getCaigouplanById" resultType="com.zb.pojo.Caigouplan">
+        select
+                planID as planID,
+                depart as depart,
+                planDate as planDate,
+                plannerID as plannerID,
+                others as others,
+                operatorID as operatorID,
+                inDate as inDate,
+                examinerID as examinerID,
+                examineState as examineState,
+                deal as deal
+        from caigouplan
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getCaigouplanListByMap" resultType="com.zb.pojo.Caigouplan" parameterType="java.util.Map">
+        select
+                planID as planID,
+                depart as depart,
+                planDate as planDate,
+                plannerID as plannerID,
+                others as others,
+                operatorID as operatorID,
+                inDate as inDate,
+                examinerID as examinerID,
+                examineState as examineState,
+                deal as deal
+        from caigouplan
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="planID != null and planID!=''">
+                    and planID=#{planID}
+                </if>
+                <if test="depart != null and depart!=''">
+                    and depart=#{depart}
+                </if>
+                <if test="planDate != null and planDate!=''">
+                    and planDate=#{planDate}
+                </if>
+                <if test="plannerID != null and plannerID!=''">
+                    and plannerID=#{plannerID}
+                </if>
+                <if test="others != null and others!=''">
+                    and others=#{others}
+                </if>
+                <if test="operatorID != null and operatorID!=''">
+                    and operatorID=#{operatorID}
+                </if>
+                <if test="inDate != null and inDate!=''">
+                    and inDate=#{inDate}
+                </if>
+                <if test="examinerID != null and examinerID!=''">
+                    and examinerID=#{examinerID}
+                </if>
+                <if test="examineState != null and examineState!=''">
+                    and examineState=#{examineState}
+                </if>
+                <if test="deal != null and deal!=''">
+                    and deal=#{deal}
+                </if>
+        </trim>
+        <if test="beginPos != null and pageSize != null ">
+            limit #{beginPos},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getCaigouplanCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from caigouplan
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="planID != null and planID!=''">
+                    and planID=#{planID}
+                </if>
+                <if test="depart != null and depart!=''">
+                    and depart=#{depart}
+                </if>
+                <if test="planDate != null and planDate!=''">
+                    and planDate=#{planDate}
+                </if>
+                <if test="plannerID != null and plannerID!=''">
+                    and plannerID=#{plannerID}
+                </if>
+                <if test="others != null and others!=''">
+                    and others=#{others}
+                </if>
+                <if test="operatorID != null and operatorID!=''">
+                    and operatorID=#{operatorID}
+                </if>
+                <if test="inDate != null and inDate!=''">
+                    and inDate=#{inDate}
+                </if>
+                <if test="examinerID != null and examinerID!=''">
+                    and examinerID=#{examinerID}
+                </if>
+                <if test="examineState != null and examineState!=''">
+                    and examineState=#{examineState}
+                </if>
+                <if test="deal != null and deal!=''">
+                    and deal=#{deal}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertCaigouplan" parameterType="com.zb.pojo.Caigouplan">
+        insert into caigouplan(
+                        planID,
+                        depart,
+                        planDate,
+                        plannerID,
+                        others,
+                        operatorID,
+                        inDate,
+                        examinerID,
+                        examineState,
+                        deal)
+        values(
+                     #{planID},
+                     #{depart},
+                     #{planDate},
+                     #{plannerID},
+                     #{others},
+                     #{operatorID},
+                     #{inDate},
+                     #{examinerID},
+                     #{examineState},
+                    #{deal})
+    </insert>
+
+    <update id="updateCaigouplan" parameterType="com.zb.pojo.Caigouplan">
+        update caigouplan
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+                        <if test="planID != null and planID!=''">
+                            planID=#{planID},
+                        </if>
+                        <if test="depart != null and depart!=''">
+                            depart=#{depart},
+                        </if>
+                        <if test="planDate != null and planDate!=''">
+                            planDate=#{planDate},
+                        </if>
+                        <if test="plannerID != null and plannerID!=''">
+                            plannerID=#{plannerID},
+                        </if>
+                        <if test="others != null and others!=''">
+                            others=#{others},
+                        </if>
+                        <if test="operatorID != null and operatorID!=''">
+                            operatorID=#{operatorID},
+                        </if>
+                        <if test="inDate != null and inDate!=''">
+                            inDate=#{inDate},
+                        </if>
+                        <if test="examinerID != null and examinerID!=''">
+                            examinerID=#{examinerID},
+                        </if>
+                        <if test="examineState != null and examineState!=''">
+                            examineState=#{examineState},
+                        </if>
+                        <if test="deal != null and deal!=''">
+                            deal=#{deal}
+                        </if>
+        </trim>
+    </update>
+</mapper>

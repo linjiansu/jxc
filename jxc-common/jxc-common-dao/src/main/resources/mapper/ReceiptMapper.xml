@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zb.mapper.ReceiptMapper">
+
+    <select id="getReceiptById" resultType="com.zb.pojo.Receipt">
+        select
+                id as id,
+                skTime as skTime,
+                sum as sum,
+                kh as kh,
+                money as money,
+                jsr as jsr,
+                pay as pay,
+                payaddress as payaddress,
+                op as op,
+                shr as shr,
+                note as note,
+                sh as sh
+        from receipt
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getReceiptListByMap" resultType="com.zb.pojo.Receipt" parameterType="java.util.Map">
+        select
+                id as id,
+                skTime as skTime,
+                sum as sum,
+                kh as kh,
+                money as money,
+                jsr as jsr,
+                pay as pay,
+                payaddress as payaddress,
+                op as op,
+                shr as shr,
+                note as note,
+                sh as sh
+        from receipt
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="skTime != null and skTime!=''">
+                    and skTime=#{skTime}
+                </if>
+                <if test="sum != null and sum!=''">
+                    and sum=#{sum}
+                </if>
+                <if test="kh != null and kh!=''">
+                    and kh=#{kh}
+                </if>
+                <if test="money != null and money!=''">
+                    and money=#{money}
+                </if>
+                <if test="jsr != null and jsr!=''">
+                    and jsr=#{jsr}
+                </if>
+                <if test="pay != null and pay!=''">
+                    and pay=#{pay}
+                </if>
+                <if test="payaddress != null and payaddress!=''">
+                    and payaddress=#{payaddress}
+                </if>
+                <if test="op != null and op!=''">
+                    and op=#{op}
+                </if>
+                <if test="shr != null and shr!=''">
+                    and shr=#{shr}
+                </if>
+                <if test="note != null and note!=''">
+                    and note=#{note}
+                </if>
+                <if test="sh != null and sh!=''">
+                    and sh=#{sh}
+                </if>
+        </trim>
+        <if test="beginPos != null and pageSize != null ">
+            limit #{beginPos},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getReceiptCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from receipt
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="skTime != null and skTime!=''">
+                    and skTime=#{skTime}
+                </if>
+                <if test="sum != null and sum!=''">
+                    and sum=#{sum}
+                </if>
+                <if test="kh != null and kh!=''">
+                    and kh=#{kh}
+                </if>
+                <if test="money != null and money!=''">
+                    and money=#{money}
+                </if>
+                <if test="jsr != null and jsr!=''">
+                    and jsr=#{jsr}
+                </if>
+                <if test="pay != null and pay!=''">
+                    and pay=#{pay}
+                </if>
+                <if test="payaddress != null and payaddress!=''">
+                    and payaddress=#{payaddress}
+                </if>
+                <if test="op != null and op!=''">
+                    and op=#{op}
+                </if>
+                <if test="shr != null and shr!=''">
+                    and shr=#{shr}
+                </if>
+                <if test="note != null and note!=''">
+                    and note=#{note}
+                </if>
+                <if test="sh != null and sh!=''">
+                    and sh=#{sh}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertReceipt" parameterType="com.zb.pojo.Receipt">
+        insert into receipt(
+                        skTime,
+                        sum,
+                        kh,
+                        money,
+                        jsr,
+                        pay,
+                        payaddress,
+                        op,
+                        shr,
+                        note,
+                        sh)
+        values(
+                     #{skTime},
+                     #{sum},
+                     #{kh},
+                     #{money},
+                     #{jsr},
+                     #{pay},
+                     #{payaddress},
+                     #{op},
+                     #{shr},
+                     #{note},
+                    #{sh})
+    </insert>
+
+    <update id="updateReceipt" parameterType="com.zb.pojo.Receipt">
+        update receipt
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+                        <if test="skTime != null and skTime!=''">
+                            skTime=#{skTime},
+                        </if>
+                        <if test="sum != null and sum!=''">
+                            sum=#{sum},
+                        </if>
+                        <if test="kh != null and kh!=''">
+                            kh=#{kh},
+                        </if>
+                        <if test="money != null and money!=''">
+                            money=#{money},
+                        </if>
+                        <if test="jsr != null and jsr!=''">
+                            jsr=#{jsr},
+                        </if>
+                        <if test="pay != null and pay!=''">
+                            pay=#{pay},
+                        </if>
+                        <if test="payaddress != null and payaddress!=''">
+                            payaddress=#{payaddress},
+                        </if>
+                        <if test="op != null and op!=''">
+                            op=#{op},
+                        </if>
+                        <if test="shr != null and shr!=''">
+                            shr=#{shr},
+                        </if>
+                        <if test="note != null and note!=''">
+                            note=#{note},
+                        </if>
+                        <if test="sh != null and sh!=''">
+                            sh=#{sh}
+                        </if>
+        </trim>
+    </update>
+</mapper>
