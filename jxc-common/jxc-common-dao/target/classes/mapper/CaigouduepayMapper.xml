@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zb.mapper.CaigouduepayMapper">
+
+    <select id="getCaigouduepayById" resultType="com.zb.pojo.Caigouduepay">
+        select
+                duepayID as duepayID,
+                payTime as payTime,
+                happenDate as happenDate,
+                supplierID as supplierID,
+                monetary as monetary,
+                dueMoney as dueMoney,
+                paidMoney as paidMoney,
+                remainMoney as remainMoney,
+                buyORreturn as buyORreturn,
+                operatorID as operatorID,
+                examinerIID as examinerIID,
+                others as others,
+                chargeoff as chargeoff
+        from caigouduepay
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getCaigouduepayListByMap" resultType="com.zb.pojo.Caigouduepay" parameterType="java.util.Map">
+        select
+                duepayID as duepayID,
+                payTime as payTime,
+                happenDate as happenDate,
+                supplierID as supplierID,
+                monetary as monetary,
+                dueMoney as dueMoney,
+                paidMoney as paidMoney,
+                remainMoney as remainMoney,
+                buyORreturn as buyORreturn,
+                operatorID as operatorID,
+                examinerIID as examinerIID,
+                others as others,
+                chargeoff as chargeoff
+        from caigouduepay
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="duepayID != null and duepayID!=''">
+                    and duepayID=#{duepayID}
+                </if>
+                <if test="payTime != null and payTime!=''">
+                    and payTime=#{payTime}
+                </if>
+                <if test="happenDate != null and happenDate!=''">
+                    and happenDate=#{happenDate}
+                </if>
+                <if test="supplierID != null and supplierID!=''">
+                    and supplierID=#{supplierID}
+                </if>
+                <if test="monetary != null and monetary!=''">
+                    and monetary=#{monetary}
+                </if>
+                <if test="dueMoney != null and dueMoney!=''">
+                    and dueMoney=#{dueMoney}
+                </if>
+                <if test="paidMoney != null and paidMoney!=''">
+                    and paidMoney=#{paidMoney}
+                </if>
+                <if test="remainMoney != null and remainMoney!=''">
+                    and remainMoney=#{remainMoney}
+                </if>
+                <if test="buyORreturn != null and buyORreturn!=''">
+                    and buyORreturn=#{buyORreturn}
+                </if>
+                <if test="operatorID != null and operatorID!=''">
+                    and operatorID=#{operatorID}
+                </if>
+                <if test="examinerIID != null and examinerIID!=''">
+                    and examinerIID=#{examinerIID}
+                </if>
+                <if test="others != null and others!=''">
+                    and others=#{others}
+                </if>
+                <if test="chargeoff != null and chargeoff!=''">
+                    and chargeoff=#{chargeoff}
+                </if>
+        </trim>
+        <if test="beginPos != null and pageSize != null ">
+            limit #{beginPos},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getCaigouduepayCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from caigouduepay
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="duepayID != null and duepayID!=''">
+                    and duepayID=#{duepayID}
+                </if>
+                <if test="payTime != null and payTime!=''">
+                    and payTime=#{payTime}
+                </if>
+                <if test="happenDate != null and happenDate!=''">
+                    and happenDate=#{happenDate}
+                </if>
+                <if test="supplierID != null and supplierID!=''">
+                    and supplierID=#{supplierID}
+                </if>
+                <if test="monetary != null and monetary!=''">
+                    and monetary=#{monetary}
+                </if>
+                <if test="dueMoney != null and dueMoney!=''">
+                    and dueMoney=#{dueMoney}
+                </if>
+                <if test="paidMoney != null and paidMoney!=''">
+                    and paidMoney=#{paidMoney}
+                </if>
+                <if test="remainMoney != null and remainMoney!=''">
+                    and remainMoney=#{remainMoney}
+                </if>
+                <if test="buyORreturn != null and buyORreturn!=''">
+                    and buyORreturn=#{buyORreturn}
+                </if>
+                <if test="operatorID != null and operatorID!=''">
+                    and operatorID=#{operatorID}
+                </if>
+                <if test="examinerIID != null and examinerIID!=''">
+                    and examinerIID=#{examinerIID}
+                </if>
+                <if test="others != null and others!=''">
+                    and others=#{others}
+                </if>
+                <if test="chargeoff != null and chargeoff!=''">
+                    and chargeoff=#{chargeoff}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertCaigouduepay" parameterType="com.zb.pojo.Caigouduepay">
+        insert into caigouduepay(
+                        duepayID,
+                        payTime,
+                        happenDate,
+                        supplierID,
+                        monetary,
+                        dueMoney,
+                        paidMoney,
+                        remainMoney,
+                        buyORreturn,
+                        operatorID,
+                        examinerIID,
+                        others,
+                        chargeoff)
+        values(
+                     #{duepayID},
+                     #{payTime},
+                     #{happenDate},
+                     #{supplierID},
+                     #{monetary},
+                     #{dueMoney},
+                     #{paidMoney},
+                     #{remainMoney},
+                     #{buyORreturn},
+                     #{operatorID},
+                     #{examinerIID},
+                     #{others},
+                    #{chargeoff})
+    </insert>
+
+    <update id="updateCaigouduepay" parameterType="com.zb.pojo.Caigouduepay">
+        update caigouduepay
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+                        <if test="duepayID != null and duepayID!=''">
+                            duepayID=#{duepayID},
+                        </if>
+                        <if test="payTime != null and payTime!=''">
+                            payTime=#{payTime},
+                        </if>
+                        <if test="happenDate != null and happenDate!=''">
+                            happenDate=#{happenDate},
+                        </if>
+                        <if test="supplierID != null and supplierID!=''">
+                            supplierID=#{supplierID},
+                        </if>
+                        <if test="monetary != null and monetary!=''">
+                            monetary=#{monetary},
+                        </if>
+                        <if test="dueMoney != null and dueMoney!=''">
+                            dueMoney=#{dueMoney},
+                        </if>
+                        <if test="paidMoney != null and paidMoney!=''">
+                            paidMoney=#{paidMoney},
+                        </if>
+                        <if test="remainMoney != null and remainMoney!=''">
+                            remainMoney=#{remainMoney},
+                        </if>
+                        <if test="buyORreturn != null and buyORreturn!=''">
+                            buyORreturn=#{buyORreturn},
+                        </if>
+                        <if test="operatorID != null and operatorID!=''">
+                            operatorID=#{operatorID},
+                        </if>
+                        <if test="examinerIID != null and examinerIID!=''">
+                            examinerIID=#{examinerIID},
+                        </if>
+                        <if test="others != null and others!=''">
+                            others=#{others},
+                        </if>
+                        <if test="chargeoff != null and chargeoff!=''">
+                            chargeoff=#{chargeoff}
+                        </if>
+        </trim>
+    </update>
+</mapper>

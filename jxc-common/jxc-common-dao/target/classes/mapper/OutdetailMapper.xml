@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zb.mapper.OutdetailMapper">
+
+    <select id="getOutdetailById" resultType="com.zb.pojo.Outdetail">
+        select
+                id as id,
+                good as good,
+                price as price,
+                outId as outId,
+                quantity as quantity
+        from outdetail
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getOutdetailListByMap" resultType="com.zb.pojo.Outdetail" parameterType="java.util.Map">
+        select
+                id as id,
+                good as good,
+                price as price,
+                outId as outId,
+                quantity as quantity
+        from outdetail
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="good != null and good!=''">
+                    and good=#{good}
+                </if>
+                <if test="price != null and price!=''">
+                    and price=#{price}
+                </if>
+                <if test="outId != null and outId!=''">
+                    and outId=#{outId}
+                </if>
+                <if test="quantity != null and quantity!=''">
+                    and quantity=#{quantity}
+                </if>
+        </trim>
+        <if test="beginPos != null and pageSize != null ">
+            limit #{beginPos},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getOutdetailCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from outdetail
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="good != null and good!=''">
+                    and good=#{good}
+                </if>
+                <if test="price != null and price!=''">
+                    and price=#{price}
+                </if>
+                <if test="outId != null and outId!=''">
+                    and outId=#{outId}
+                </if>
+                <if test="quantity != null and quantity!=''">
+                    and quantity=#{quantity}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertOutdetail" parameterType="com.zb.pojo.Outdetail">
+        insert into outdetail(
+                        good,
+                        price,
+                        outId,
+                        quantity)
+        values(
+                     #{good},
+                     #{price},
+                     #{outId},
+                    #{quantity})
+    </insert>
+
+    <update id="updateOutdetail" parameterType="com.zb.pojo.Outdetail">
+        update outdetail
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+                        <if test="good != null and good!=''">
+                            good=#{good},
+                        </if>
+                        <if test="price != null and price!=''">
+                            price=#{price},
+                        </if>
+                        <if test="outId != null and outId!=''">
+                            outId=#{outId},
+                        </if>
+                        <if test="quantity != null and quantity!=''">
+                            quantity=#{quantity}
+                        </if>
+        </trim>
+    </update>
+</mapper>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zb.mapper.OrderdetailMapper">
+
+    <select id="getOrderdetailById" resultType="com.zb.pojo.Orderdetail">
+        select
+                orderDetailID as orderDetailID,
+                orderID as orderID,
+                goodsID as goodsID,
+                quantity as quantity,
+                uintprice as uintprice,
+                others as others
+        from orderdetail
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getOrderdetailListByMap" resultType="com.zb.pojo.Orderdetail" parameterType="java.util.Map">
+        select
+                orderDetailID as orderDetailID,
+                orderID as orderID,
+                goodsID as goodsID,
+                quantity as quantity,
+                uintprice as uintprice,
+                others as others
+        from orderdetail
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="orderDetailID != null and orderDetailID!=''">
+                    and orderDetailID=#{orderDetailID}
+                </if>
+                <if test="orderID != null and orderID!=''">
+                    and orderID=#{orderID}
+                </if>
+                <if test="goodsID != null and goodsID!=''">
+                    and goodsID=#{goodsID}
+                </if>
+                <if test="quantity != null and quantity!=''">
+                    and quantity=#{quantity}
+                </if>
+                <if test="uintprice != null and uintprice!=''">
+                    and uintprice=#{uintprice}
+                </if>
+                <if test="others != null and others!=''">
+                    and others=#{others}
+                </if>
+        </trim>
+        <if test="beginPos != null and pageSize != null ">
+            limit #{beginPos},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getOrderdetailCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from orderdetail
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="orderDetailID != null and orderDetailID!=''">
+                    and orderDetailID=#{orderDetailID}
+                </if>
+                <if test="orderID != null and orderID!=''">
+                    and orderID=#{orderID}
+                </if>
+                <if test="goodsID != null and goodsID!=''">
+                    and goodsID=#{goodsID}
+                </if>
+                <if test="quantity != null and quantity!=''">
+                    and quantity=#{quantity}
+                </if>
+                <if test="uintprice != null and uintprice!=''">
+                    and uintprice=#{uintprice}
+                </if>
+                <if test="others != null and others!=''">
+                    and others=#{others}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertOrderdetail" parameterType="com.zb.pojo.Orderdetail">
+        insert into orderdetail(
+                        orderDetailID,
+                        orderID,
+                        goodsID,
+                        quantity,
+                        uintprice,
+                        others)
+        values(
+                     #{orderDetailID},
+                     #{orderID},
+                     #{goodsID},
+                     #{quantity},
+                     #{uintprice},
+                    #{others})
+    </insert>
+
+    <update id="updateOrderdetail" parameterType="com.zb.pojo.Orderdetail">
+        update orderdetail
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+                        <if test="orderDetailID != null and orderDetailID!=''">
+                            orderDetailID=#{orderDetailID},
+                        </if>
+                        <if test="orderID != null and orderID!=''">
+                            orderID=#{orderID},
+                        </if>
+                        <if test="goodsID != null and goodsID!=''">
+                            goodsID=#{goodsID},
+                        </if>
+                        <if test="quantity != null and quantity!=''">
+                            quantity=#{quantity},
+                        </if>
+                        <if test="uintprice != null and uintprice!=''">
+                            uintprice=#{uintprice},
+                        </if>
+                        <if test="others != null and others!=''">
+                            others=#{others}
+                        </if>
+        </trim>
+    </update>
+</mapper>

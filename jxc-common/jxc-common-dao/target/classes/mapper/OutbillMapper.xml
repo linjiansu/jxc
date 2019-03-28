@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zb.mapper.OutbillMapper">
+
+    <select id="getOutbillById" resultType="com.zb.pojo.Outbill">
+        select
+                Id as Id,
+                outdate as outdate,
+                checker as checker,
+                issuer as issuer,
+                deliverck as deliverck,
+                check as check,
+                checkdate as checkdate
+        from outbill
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getOutbillListByMap" resultType="com.zb.pojo.Outbill" parameterType="java.util.Map">
+        select
+                Id as Id,
+                outdate as outdate,
+                checker as checker,
+                issuer as issuer,
+                deliverck as deliverck,
+                check as check,
+                checkdate as checkdate
+        from outbill
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="Id != null and Id!=''">
+                    and Id=#{Id}
+                </if>
+                <if test="outdate != null and outdate!=''">
+                    and outdate=#{outdate}
+                </if>
+                <if test="checker != null and checker!=''">
+                    and checker=#{checker}
+                </if>
+                <if test="issuer != null and issuer!=''">
+                    and issuer=#{issuer}
+                </if>
+                <if test="deliverck != null and deliverck!=''">
+                    and deliverck=#{deliverck}
+                </if>
+                <if test="check != null and check!=''">
+                    and check=#{check}
+                </if>
+                <if test="checkdate != null and checkdate!=''">
+                    and checkdate=#{checkdate}
+                </if>
+        </trim>
+        <if test="beginPos != null and pageSize != null ">
+            limit #{beginPos},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getOutbillCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from outbill
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="Id != null and Id!=''">
+                    and Id=#{Id}
+                </if>
+                <if test="outdate != null and outdate!=''">
+                    and outdate=#{outdate}
+                </if>
+                <if test="checker != null and checker!=''">
+                    and checker=#{checker}
+                </if>
+                <if test="issuer != null and issuer!=''">
+                    and issuer=#{issuer}
+                </if>
+                <if test="deliverck != null and deliverck!=''">
+                    and deliverck=#{deliverck}
+                </if>
+                <if test="check != null and check!=''">
+                    and check=#{check}
+                </if>
+                <if test="checkdate != null and checkdate!=''">
+                    and checkdate=#{checkdate}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertOutbill" parameterType="com.zb.pojo.Outbill">
+        insert into outbill(
+                        Id,
+                        outdate,
+                        checker,
+                        issuer,
+                        deliverck,
+                        check,
+                        checkdate)
+        values(
+                     #{Id},
+                     #{outdate},
+                     #{checker},
+                     #{issuer},
+                     #{deliverck},
+                     #{check},
+                    #{checkdate})
+    </insert>
+
+    <update id="updateOutbill" parameterType="com.zb.pojo.Outbill">
+        update outbill
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+                        <if test="Id != null and Id!=''">
+                            Id=#{Id},
+                        </if>
+                        <if test="outdate != null and outdate!=''">
+                            outdate=#{outdate},
+                        </if>
+                        <if test="checker != null and checker!=''">
+                            checker=#{checker},
+                        </if>
+                        <if test="issuer != null and issuer!=''">
+                            issuer=#{issuer},
+                        </if>
+                        <if test="deliverck != null and deliverck!=''">
+                            deliverck=#{deliverck},
+                        </if>
+                        <if test="check != null and check!=''">
+                            check=#{check},
+                        </if>
+                        <if test="checkdate != null and checkdate!=''">
+                            checkdate=#{checkdate}
+                        </if>
+        </trim>
+    </update>
+</mapper>

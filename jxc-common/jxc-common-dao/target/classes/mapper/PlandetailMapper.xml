@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zb.mapper.PlandetailMapper">
+
+    <select id="getPlandetailById" resultType="com.zb.pojo.Plandetail">
+        select
+                planDetailID as planDetailID,
+                planID as planID,
+                goodsID as goodsID,
+                quantity as quantity,
+                others as others
+        from plandetail
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getPlandetailListByMap" resultType="com.zb.pojo.Plandetail" parameterType="java.util.Map">
+        select
+                planDetailID as planDetailID,
+                planID as planID,
+                goodsID as goodsID,
+                quantity as quantity,
+                others as others
+        from plandetail
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="planDetailID != null and planDetailID!=''">
+                    and planDetailID=#{planDetailID}
+                </if>
+                <if test="planID != null and planID!=''">
+                    and planID=#{planID}
+                </if>
+                <if test="goodsID != null and goodsID!=''">
+                    and goodsID=#{goodsID}
+                </if>
+                <if test="quantity != null and quantity!=''">
+                    and quantity=#{quantity}
+                </if>
+                <if test="others != null and others!=''">
+                    and others=#{others}
+                </if>
+        </trim>
+        <if test="beginPos != null and pageSize != null ">
+            limit #{beginPos},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getPlandetailCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from plandetail
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="planDetailID != null and planDetailID!=''">
+                    and planDetailID=#{planDetailID}
+                </if>
+                <if test="planID != null and planID!=''">
+                    and planID=#{planID}
+                </if>
+                <if test="goodsID != null and goodsID!=''">
+                    and goodsID=#{goodsID}
+                </if>
+                <if test="quantity != null and quantity!=''">
+                    and quantity=#{quantity}
+                </if>
+                <if test="others != null and others!=''">
+                    and others=#{others}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertPlandetail" parameterType="com.zb.pojo.Plandetail">
+        insert into plandetail(
+                        planDetailID,
+                        planID,
+                        goodsID,
+                        quantity,
+                        others)
+        values(
+                     #{planDetailID},
+                     #{planID},
+                     #{goodsID},
+                     #{quantity},
+                    #{others})
+    </insert>
+
+    <update id="updatePlandetail" parameterType="com.zb.pojo.Plandetail">
+        update plandetail
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+                        <if test="planDetailID != null and planDetailID!=''">
+                            planDetailID=#{planDetailID},
+                        </if>
+                        <if test="planID != null and planID!=''">
+                            planID=#{planID},
+                        </if>
+                        <if test="goodsID != null and goodsID!=''">
+                            goodsID=#{goodsID},
+                        </if>
+                        <if test="quantity != null and quantity!=''">
+                            quantity=#{quantity},
+                        </if>
+                        <if test="others != null and others!=''">
+                            others=#{others}
+                        </if>
+        </trim>
+    </update>
+</mapper>

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zb.mapper.ArMapper">
+
+    <select id="getArById" resultType="com.zb.pojo.Ar">
+        select
+                id as id,
+                skTime as skTime,
+                fsTime as fsTime,
+                kh as kh,
+                money as money,
+                ysMoney as ysMoney,
+                yshouMoney as yshouMoney,
+                balance as balance,
+                sd as sd,
+                op as op,
+                shr as shr,
+                note as note,
+                sh as sh
+        from ar
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getArListByMap" resultType="com.zb.pojo.Ar" parameterType="java.util.Map">
+        select
+                id as id,
+                skTime as skTime,
+                fsTime as fsTime,
+                kh as kh,
+                money as money,
+                ysMoney as ysMoney,
+                yshouMoney as yshouMoney,
+                balance as balance,
+                sd as sd,
+                op as op,
+                shr as shr,
+                note as note,
+                sh as sh
+        from ar
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="skTime != null and skTime!=''">
+                    and skTime=#{skTime}
+                </if>
+                <if test="fsTime != null and fsTime!=''">
+                    and fsTime=#{fsTime}
+                </if>
+                <if test="kh != null and kh!=''">
+                    and kh=#{kh}
+                </if>
+                <if test="money != null and money!=''">
+                    and money=#{money}
+                </if>
+                <if test="ysMoney != null and ysMoney!=''">
+                    and ysMoney=#{ysMoney}
+                </if>
+                <if test="yshouMoney != null and yshouMoney!=''">
+                    and yshouMoney=#{yshouMoney}
+                </if>
+                <if test="balance != null and balance!=''">
+                    and balance=#{balance}
+                </if>
+                <if test="sd != null and sd!=''">
+                    and sd=#{sd}
+                </if>
+                <if test="op != null and op!=''">
+                    and op=#{op}
+                </if>
+                <if test="shr != null and shr!=''">
+                    and shr=#{shr}
+                </if>
+                <if test="note != null and note!=''">
+                    and note=#{note}
+                </if>
+                <if test="sh != null and sh!=''">
+                    and sh=#{sh}
+                </if>
+        </trim>
+        <if test="beginPos != null and pageSize != null ">
+            limit #{beginPos},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getArCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from ar
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="skTime != null and skTime!=''">
+                    and skTime=#{skTime}
+                </if>
+                <if test="fsTime != null and fsTime!=''">
+                    and fsTime=#{fsTime}
+                </if>
+                <if test="kh != null and kh!=''">
+                    and kh=#{kh}
+                </if>
+                <if test="money != null and money!=''">
+                    and money=#{money}
+                </if>
+                <if test="ysMoney != null and ysMoney!=''">
+                    and ysMoney=#{ysMoney}
+                </if>
+                <if test="yshouMoney != null and yshouMoney!=''">
+                    and yshouMoney=#{yshouMoney}
+                </if>
+                <if test="balance != null and balance!=''">
+                    and balance=#{balance}
+                </if>
+                <if test="sd != null and sd!=''">
+                    and sd=#{sd}
+                </if>
+                <if test="op != null and op!=''">
+                    and op=#{op}
+                </if>
+                <if test="shr != null and shr!=''">
+                    and shr=#{shr}
+                </if>
+                <if test="note != null and note!=''">
+                    and note=#{note}
+                </if>
+                <if test="sh != null and sh!=''">
+                    and sh=#{sh}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertAr" parameterType="com.zb.pojo.Ar">
+        insert into ar(
+                        skTime,
+                        fsTime,
+                        kh,
+                        money,
+                        ysMoney,
+                        yshouMoney,
+                        balance,
+                        sd,
+                        op,
+                        shr,
+                        note,
+                        sh)
+        values(
+                     #{skTime},
+                     #{fsTime},
+                     #{kh},
+                     #{money},
+                     #{ysMoney},
+                     #{yshouMoney},
+                     #{balance},
+                     #{sd},
+                     #{op},
+                     #{shr},
+                     #{note},
+                    #{sh})
+    </insert>
+
+    <update id="updateAr" parameterType="com.zb.pojo.Ar">
+        update ar
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+                        <if test="skTime != null and skTime!=''">
+                            skTime=#{skTime},
+                        </if>
+                        <if test="fsTime != null and fsTime!=''">
+                            fsTime=#{fsTime},
+                        </if>
+                        <if test="kh != null and kh!=''">
+                            kh=#{kh},
+                        </if>
+                        <if test="money != null and money!=''">
+                            money=#{money},
+                        </if>
+                        <if test="ysMoney != null and ysMoney!=''">
+                            ysMoney=#{ysMoney},
+                        </if>
+                        <if test="yshouMoney != null and yshouMoney!=''">
+                            yshouMoney=#{yshouMoney},
+                        </if>
+                        <if test="balance != null and balance!=''">
+                            balance=#{balance},
+                        </if>
+                        <if test="sd != null and sd!=''">
+                            sd=#{sd},
+                        </if>
+                        <if test="op != null and op!=''">
+                            op=#{op},
+                        </if>
+                        <if test="shr != null and shr!=''">
+                            shr=#{shr},
+                        </if>
+                        <if test="note != null and note!=''">
+                            note=#{note},
+                        </if>
+                        <if test="sh != null and sh!=''">
+                            sh=#{sh}
+                        </if>
+        </trim>
+    </update>
+</mapper>

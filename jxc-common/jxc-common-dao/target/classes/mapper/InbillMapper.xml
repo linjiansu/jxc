@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zb.mapper.InbillMapper">
+
+    <select id="getInbillById" resultType="com.zb.pojo.Inbill">
+        select
+                billId as billId,
+                date as date,
+                checker as checker,
+                issuer as issuer,
+                receiveck as receiveck,
+                check as check,
+                checkdate as checkdate
+        from inbill
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getInbillListByMap" resultType="com.zb.pojo.Inbill" parameterType="java.util.Map">
+        select
+                billId as billId,
+                date as date,
+                checker as checker,
+                issuer as issuer,
+                receiveck as receiveck,
+                check as check,
+                checkdate as checkdate
+        from inbill
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="billId != null and billId!=''">
+                    and billId=#{billId}
+                </if>
+                <if test="date != null and date!=''">
+                    and date=#{date}
+                </if>
+                <if test="checker != null and checker!=''">
+                    and checker=#{checker}
+                </if>
+                <if test="issuer != null and issuer!=''">
+                    and issuer=#{issuer}
+                </if>
+                <if test="receiveck != null and receiveck!=''">
+                    and receiveck=#{receiveck}
+                </if>
+                <if test="check != null and check!=''">
+                    and check=#{check}
+                </if>
+                <if test="checkdate != null and checkdate!=''">
+                    and checkdate=#{checkdate}
+                </if>
+        </trim>
+        <if test="beginPos != null and pageSize != null ">
+            limit #{beginPos},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getInbillCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from inbill
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="billId != null and billId!=''">
+                    and billId=#{billId}
+                </if>
+                <if test="date != null and date!=''">
+                    and date=#{date}
+                </if>
+                <if test="checker != null and checker!=''">
+                    and checker=#{checker}
+                </if>
+                <if test="issuer != null and issuer!=''">
+                    and issuer=#{issuer}
+                </if>
+                <if test="receiveck != null and receiveck!=''">
+                    and receiveck=#{receiveck}
+                </if>
+                <if test="check != null and check!=''">
+                    and check=#{check}
+                </if>
+                <if test="checkdate != null and checkdate!=''">
+                    and checkdate=#{checkdate}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertInbill" parameterType="com.zb.pojo.Inbill">
+        insert into inbill(
+                        billId,
+                        date,
+                        checker,
+                        issuer,
+                        receiveck,
+                        check,
+                        checkdate)
+        values(
+                     #{billId},
+                     #{date},
+                     #{checker},
+                     #{issuer},
+                     #{receiveck},
+                     #{check},
+                    #{checkdate})
+    </insert>
+
+    <update id="updateInbill" parameterType="com.zb.pojo.Inbill">
+        update inbill
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+                        <if test="billId != null and billId!=''">
+                            billId=#{billId},
+                        </if>
+                        <if test="date != null and date!=''">
+                            date=#{date},
+                        </if>
+                        <if test="checker != null and checker!=''">
+                            checker=#{checker},
+                        </if>
+                        <if test="issuer != null and issuer!=''">
+                            issuer=#{issuer},
+                        </if>
+                        <if test="receiveck != null and receiveck!=''">
+                            receiveck=#{receiveck},
+                        </if>
+                        <if test="check != null and check!=''">
+                            check=#{check},
+                        </if>
+                        <if test="checkdate != null and checkdate!=''">
+                            checkdate=#{checkdate}
+                        </if>
+        </trim>
+    </update>
+</mapper>

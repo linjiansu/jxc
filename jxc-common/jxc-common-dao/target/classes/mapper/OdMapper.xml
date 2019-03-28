@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zb.mapper.OdMapper">
+
+    <select id="getOdById" resultType="com.zb.pojo.Od">
+        select
+                id as id,
+                good as good,
+                price as price,
+                orderId as orderId,
+                quantity as quantity
+        from od
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getOdListByMap" resultType="com.zb.pojo.Od" parameterType="java.util.Map">
+        select
+                id as id,
+                good as good,
+                price as price,
+                orderId as orderId,
+                quantity as quantity
+        from od
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="good != null and good!=''">
+                    and good=#{good}
+                </if>
+                <if test="price != null and price!=''">
+                    and price=#{price}
+                </if>
+                <if test="orderId != null and orderId!=''">
+                    and orderId=#{orderId}
+                </if>
+                <if test="quantity != null and quantity!=''">
+                    and quantity=#{quantity}
+                </if>
+        </trim>
+        <if test="beginPos != null and pageSize != null ">
+            limit #{beginPos},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getOdCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from od
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="good != null and good!=''">
+                    and good=#{good}
+                </if>
+                <if test="price != null and price!=''">
+                    and price=#{price}
+                </if>
+                <if test="orderId != null and orderId!=''">
+                    and orderId=#{orderId}
+                </if>
+                <if test="quantity != null and quantity!=''">
+                    and quantity=#{quantity}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertOd" parameterType="com.zb.pojo.Od">
+        insert into od(
+                        good,
+                        price,
+                        orderId,
+                        quantity)
+        values(
+                     #{good},
+                     #{price},
+                     #{orderId},
+                    #{quantity})
+    </insert>
+
+    <update id="updateOd" parameterType="com.zb.pojo.Od">
+        update od
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+                        <if test="good != null and good!=''">
+                            good=#{good},
+                        </if>
+                        <if test="price != null and price!=''">
+                            price=#{price},
+                        </if>
+                        <if test="orderId != null and orderId!=''">
+                            orderId=#{orderId},
+                        </if>
+                        <if test="quantity != null and quantity!=''">
+                            quantity=#{quantity}
+                        </if>
+        </trim>
+    </update>
+</mapper>

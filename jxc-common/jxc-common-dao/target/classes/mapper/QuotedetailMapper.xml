@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zb.mapper.QuotedetailMapper">
+
+    <select id="getQuotedetailById" resultType="com.zb.pojo.Quotedetail">
+        select
+                id as id,
+                good as good,
+                price as price,
+                quoteId as quoteId,
+                quantity as quantity
+        from quotedetail
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getQuotedetailListByMap" resultType="com.zb.pojo.Quotedetail" parameterType="java.util.Map">
+        select
+                id as id,
+                good as good,
+                price as price,
+                quoteId as quoteId,
+                quantity as quantity
+        from quotedetail
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="good != null and good!=''">
+                    and good=#{good}
+                </if>
+                <if test="price != null and price!=''">
+                    and price=#{price}
+                </if>
+                <if test="quoteId != null and quoteId!=''">
+                    and quoteId=#{quoteId}
+                </if>
+                <if test="quantity != null and quantity!=''">
+                    and quantity=#{quantity}
+                </if>
+        </trim>
+        <if test="beginPos != null and pageSize != null ">
+            limit #{beginPos},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getQuotedetailCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from quotedetail
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="good != null and good!=''">
+                    and good=#{good}
+                </if>
+                <if test="price != null and price!=''">
+                    and price=#{price}
+                </if>
+                <if test="quoteId != null and quoteId!=''">
+                    and quoteId=#{quoteId}
+                </if>
+                <if test="quantity != null and quantity!=''">
+                    and quantity=#{quantity}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertQuotedetail" parameterType="com.zb.pojo.Quotedetail">
+        insert into quotedetail(
+                        good,
+                        price,
+                        quoteId,
+                        quantity)
+        values(
+                     #{good},
+                     #{price},
+                     #{quoteId},
+                    #{quantity})
+    </insert>
+
+    <update id="updateQuotedetail" parameterType="com.zb.pojo.Quotedetail">
+        update quotedetail
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+                        <if test="good != null and good!=''">
+                            good=#{good},
+                        </if>
+                        <if test="price != null and price!=''">
+                            price=#{price},
+                        </if>
+                        <if test="quoteId != null and quoteId!=''">
+                            quoteId=#{quoteId},
+                        </if>
+                        <if test="quantity != null and quantity!=''">
+                            quantity=#{quantity}
+                        </if>
+        </trim>
+    </update>
+</mapper>

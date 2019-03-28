@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zb.mapper.ChangebillinfoMapper">
+
+    <select id="getChangebillinfoById" resultType="com.zb.pojo.Changebillinfo">
+        select
+                billId as billId,
+                goodname as goodname,
+                color as color,
+                price as price,
+                chengebillid as chengebillid,
+                number as number,
+                unit as unit
+        from changebillinfo
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getChangebillinfoListByMap" resultType="com.zb.pojo.Changebillinfo" parameterType="java.util.Map">
+        select
+                billId as billId,
+                goodname as goodname,
+                color as color,
+                price as price,
+                chengebillid as chengebillid,
+                number as number,
+                unit as unit
+        from changebillinfo
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="billId != null and billId!=''">
+                    and billId=#{billId}
+                </if>
+                <if test="goodname != null and goodname!=''">
+                    and goodname=#{goodname}
+                </if>
+                <if test="color != null and color!=''">
+                    and color=#{color}
+                </if>
+                <if test="price != null and price!=''">
+                    and price=#{price}
+                </if>
+                <if test="chengebillid != null and chengebillid!=''">
+                    and chengebillid=#{chengebillid}
+                </if>
+                <if test="number != null and number!=''">
+                    and number=#{number}
+                </if>
+                <if test="unit != null and unit!=''">
+                    and unit=#{unit}
+                </if>
+        </trim>
+        <if test="beginPos != null and pageSize != null ">
+            limit #{beginPos},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getChangebillinfoCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from changebillinfo
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="billId != null and billId!=''">
+                    and billId=#{billId}
+                </if>
+                <if test="goodname != null and goodname!=''">
+                    and goodname=#{goodname}
+                </if>
+                <if test="color != null and color!=''">
+                    and color=#{color}
+                </if>
+                <if test="price != null and price!=''">
+                    and price=#{price}
+                </if>
+                <if test="chengebillid != null and chengebillid!=''">
+                    and chengebillid=#{chengebillid}
+                </if>
+                <if test="number != null and number!=''">
+                    and number=#{number}
+                </if>
+                <if test="unit != null and unit!=''">
+                    and unit=#{unit}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertChangebillinfo" parameterType="com.zb.pojo.Changebillinfo">
+        insert into changebillinfo(
+                        billId,
+                        goodname,
+                        color,
+                        price,
+                        chengebillid,
+                        number,
+                        unit)
+        values(
+                     #{billId},
+                     #{goodname},
+                     #{color},
+                     #{price},
+                     #{chengebillid},
+                     #{number},
+                    #{unit})
+    </insert>
+
+    <update id="updateChangebillinfo" parameterType="com.zb.pojo.Changebillinfo">
+        update changebillinfo
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+                        <if test="billId != null and billId!=''">
+                            billId=#{billId},
+                        </if>
+                        <if test="goodname != null and goodname!=''">
+                            goodname=#{goodname},
+                        </if>
+                        <if test="color != null and color!=''">
+                            color=#{color},
+                        </if>
+                        <if test="price != null and price!=''">
+                            price=#{price},
+                        </if>
+                        <if test="chengebillid != null and chengebillid!=''">
+                            chengebillid=#{chengebillid},
+                        </if>
+                        <if test="number != null and number!=''">
+                            number=#{number},
+                        </if>
+                        <if test="unit != null and unit!=''">
+                            unit=#{unit}
+                        </if>
+        </trim>
+    </update>
+</mapper>

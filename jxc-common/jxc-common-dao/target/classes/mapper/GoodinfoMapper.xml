@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zb.mapper.GoodinfoMapper">
+
+    <select id="getGoodinfoById" resultType="com.zb.pojo.Goodinfo">
+        select
+                goodId as goodId,
+                goodname as goodname,
+                kinds as kinds,
+                model as model,
+                unit as unit,
+                ckid as ckid,
+                ckname as ckname,
+                inprice as inprice,
+                outprice as outprice,
+                stock as stock
+        from goodinfo
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getGoodinfoListByMap" resultType="com.zb.pojo.Goodinfo" parameterType="java.util.Map">
+        select
+                goodId as goodId,
+                goodname as goodname,
+                kinds as kinds,
+                model as model,
+                unit as unit,
+                ckid as ckid,
+                ckname as ckname,
+                inprice as inprice,
+                outprice as outprice,
+                stock as stock
+        from goodinfo
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="goodId != null and goodId!=''">
+                    and goodId=#{goodId}
+                </if>
+                <if test="goodname != null and goodname!=''">
+                    and goodname=#{goodname}
+                </if>
+                <if test="kinds != null and kinds!=''">
+                    and kinds=#{kinds}
+                </if>
+                <if test="model != null and model!=''">
+                    and model=#{model}
+                </if>
+                <if test="unit != null and unit!=''">
+                    and unit=#{unit}
+                </if>
+                <if test="ckid != null and ckid!=''">
+                    and ckid=#{ckid}
+                </if>
+                <if test="ckname != null and ckname!=''">
+                    and ckname=#{ckname}
+                </if>
+                <if test="inprice != null and inprice!=''">
+                    and inprice=#{inprice}
+                </if>
+                <if test="outprice != null and outprice!=''">
+                    and outprice=#{outprice}
+                </if>
+                <if test="stock != null and stock!=''">
+                    and stock=#{stock}
+                </if>
+        </trim>
+        <if test="beginPos != null and pageSize != null ">
+            limit #{beginPos},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getGoodinfoCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from goodinfo
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="goodId != null and goodId!=''">
+                    and goodId=#{goodId}
+                </if>
+                <if test="goodname != null and goodname!=''">
+                    and goodname=#{goodname}
+                </if>
+                <if test="kinds != null and kinds!=''">
+                    and kinds=#{kinds}
+                </if>
+                <if test="model != null and model!=''">
+                    and model=#{model}
+                </if>
+                <if test="unit != null and unit!=''">
+                    and unit=#{unit}
+                </if>
+                <if test="ckid != null and ckid!=''">
+                    and ckid=#{ckid}
+                </if>
+                <if test="ckname != null and ckname!=''">
+                    and ckname=#{ckname}
+                </if>
+                <if test="inprice != null and inprice!=''">
+                    and inprice=#{inprice}
+                </if>
+                <if test="outprice != null and outprice!=''">
+                    and outprice=#{outprice}
+                </if>
+                <if test="stock != null and stock!=''">
+                    and stock=#{stock}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertGoodinfo" parameterType="com.zb.pojo.Goodinfo">
+        insert into goodinfo(
+                        goodId,
+                        goodname,
+                        kinds,
+                        model,
+                        unit,
+                        ckid,
+                        ckname,
+                        inprice,
+                        outprice,
+                        stock)
+        values(
+                     #{goodId},
+                     #{goodname},
+                     #{kinds},
+                     #{model},
+                     #{unit},
+                     #{ckid},
+                     #{ckname},
+                     #{inprice},
+                     #{outprice},
+                    #{stock})
+    </insert>
+
+    <update id="updateGoodinfo" parameterType="com.zb.pojo.Goodinfo">
+        update goodinfo
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+                        <if test="goodId != null and goodId!=''">
+                            goodId=#{goodId},
+                        </if>
+                        <if test="goodname != null and goodname!=''">
+                            goodname=#{goodname},
+                        </if>
+                        <if test="kinds != null and kinds!=''">
+                            kinds=#{kinds},
+                        </if>
+                        <if test="model != null and model!=''">
+                            model=#{model},
+                        </if>
+                        <if test="unit != null and unit!=''">
+                            unit=#{unit},
+                        </if>
+                        <if test="ckid != null and ckid!=''">
+                            ckid=#{ckid},
+                        </if>
+                        <if test="ckname != null and ckname!=''">
+                            ckname=#{ckname},
+                        </if>
+                        <if test="inprice != null and inprice!=''">
+                            inprice=#{inprice},
+                        </if>
+                        <if test="outprice != null and outprice!=''">
+                            outprice=#{outprice},
+                        </if>
+                        <if test="stock != null and stock!=''">
+                            stock=#{stock}
+                        </if>
+        </trim>
+    </update>
+</mapper>

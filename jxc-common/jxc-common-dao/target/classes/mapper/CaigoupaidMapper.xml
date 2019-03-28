@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zb.mapper.CaigoupaidMapper">
+
+    <select id="getCaigoupaidById" resultType="com.zb.pojo.Caigoupaid">
+        select
+                paidID as paidID,
+                payTime as payTime,
+                money as money,
+                billID as billID,
+                supplierID as supplierID,
+                monetary as monetary,
+                payStyle as payStyle,
+                payFrom as payFrom,
+                operatorID as operatorID,
+                examinerIID as examinerIID,
+                others as others,
+                examineState as examineState
+        from caigoupaid
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getCaigoupaidListByMap" resultType="com.zb.pojo.Caigoupaid" parameterType="java.util.Map">
+        select
+                paidID as paidID,
+                payTime as payTime,
+                money as money,
+                billID as billID,
+                supplierID as supplierID,
+                monetary as monetary,
+                payStyle as payStyle,
+                payFrom as payFrom,
+                operatorID as operatorID,
+                examinerIID as examinerIID,
+                others as others,
+                examineState as examineState
+        from caigoupaid
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="paidID != null and paidID!=''">
+                    and paidID=#{paidID}
+                </if>
+                <if test="payTime != null and payTime!=''">
+                    and payTime=#{payTime}
+                </if>
+                <if test="money != null and money!=''">
+                    and money=#{money}
+                </if>
+                <if test="billID != null and billID!=''">
+                    and billID=#{billID}
+                </if>
+                <if test="supplierID != null and supplierID!=''">
+                    and supplierID=#{supplierID}
+                </if>
+                <if test="monetary != null and monetary!=''">
+                    and monetary=#{monetary}
+                </if>
+                <if test="payStyle != null and payStyle!=''">
+                    and payStyle=#{payStyle}
+                </if>
+                <if test="payFrom != null and payFrom!=''">
+                    and payFrom=#{payFrom}
+                </if>
+                <if test="operatorID != null and operatorID!=''">
+                    and operatorID=#{operatorID}
+                </if>
+                <if test="examinerIID != null and examinerIID!=''">
+                    and examinerIID=#{examinerIID}
+                </if>
+                <if test="others != null and others!=''">
+                    and others=#{others}
+                </if>
+                <if test="examineState != null and examineState!=''">
+                    and examineState=#{examineState}
+                </if>
+        </trim>
+        <if test="beginPos != null and pageSize != null ">
+            limit #{beginPos},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getCaigoupaidCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from caigoupaid
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="paidID != null and paidID!=''">
+                    and paidID=#{paidID}
+                </if>
+                <if test="payTime != null and payTime!=''">
+                    and payTime=#{payTime}
+                </if>
+                <if test="money != null and money!=''">
+                    and money=#{money}
+                </if>
+                <if test="billID != null and billID!=''">
+                    and billID=#{billID}
+                </if>
+                <if test="supplierID != null and supplierID!=''">
+                    and supplierID=#{supplierID}
+                </if>
+                <if test="monetary != null and monetary!=''">
+                    and monetary=#{monetary}
+                </if>
+                <if test="payStyle != null and payStyle!=''">
+                    and payStyle=#{payStyle}
+                </if>
+                <if test="payFrom != null and payFrom!=''">
+                    and payFrom=#{payFrom}
+                </if>
+                <if test="operatorID != null and operatorID!=''">
+                    and operatorID=#{operatorID}
+                </if>
+                <if test="examinerIID != null and examinerIID!=''">
+                    and examinerIID=#{examinerIID}
+                </if>
+                <if test="others != null and others!=''">
+                    and others=#{others}
+                </if>
+                <if test="examineState != null and examineState!=''">
+                    and examineState=#{examineState}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertCaigoupaid" parameterType="com.zb.pojo.Caigoupaid">
+        insert into caigoupaid(
+                        paidID,
+                        payTime,
+                        money,
+                        billID,
+                        supplierID,
+                        monetary,
+                        payStyle,
+                        payFrom,
+                        operatorID,
+                        examinerIID,
+                        others,
+                        examineState)
+        values(
+                     #{paidID},
+                     #{payTime},
+                     #{money},
+                     #{billID},
+                     #{supplierID},
+                     #{monetary},
+                     #{payStyle},
+                     #{payFrom},
+                     #{operatorID},
+                     #{examinerIID},
+                     #{others},
+                    #{examineState})
+    </insert>
+
+    <update id="updateCaigoupaid" parameterType="com.zb.pojo.Caigoupaid">
+        update caigoupaid
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+                        <if test="paidID != null and paidID!=''">
+                            paidID=#{paidID},
+                        </if>
+                        <if test="payTime != null and payTime!=''">
+                            payTime=#{payTime},
+                        </if>
+                        <if test="money != null and money!=''">
+                            money=#{money},
+                        </if>
+                        <if test="billID != null and billID!=''">
+                            billID=#{billID},
+                        </if>
+                        <if test="supplierID != null and supplierID!=''">
+                            supplierID=#{supplierID},
+                        </if>
+                        <if test="monetary != null and monetary!=''">
+                            monetary=#{monetary},
+                        </if>
+                        <if test="payStyle != null and payStyle!=''">
+                            payStyle=#{payStyle},
+                        </if>
+                        <if test="payFrom != null and payFrom!=''">
+                            payFrom=#{payFrom},
+                        </if>
+                        <if test="operatorID != null and operatorID!=''">
+                            operatorID=#{operatorID},
+                        </if>
+                        <if test="examinerIID != null and examinerIID!=''">
+                            examinerIID=#{examinerIID},
+                        </if>
+                        <if test="others != null and others!=''">
+                            others=#{others},
+                        </if>
+                        <if test="examineState != null and examineState!=''">
+                            examineState=#{examineState}
+                        </if>
+        </trim>
+    </update>
+</mapper>

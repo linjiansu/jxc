@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zb.mapper.GoodbackMapper">
+
+    <select id="getGoodbackById" resultType="com.zb.pojo.Goodback">
+        select
+                id as id,
+                backTime as backTime,
+                kh as kh,
+                money as money,
+                sellId as sellId,
+                ysr as ysr,
+                note as note,
+                op as op,
+                shr as shr,
+                sh as sh,
+                inTime as inTime,
+                shTime as shTime
+        from goodback
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="id != null">
+                and id=#{id}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getGoodbackListByMap" resultType="com.zb.pojo.Goodback" parameterType="java.util.Map">
+        select
+                id as id,
+                backTime as backTime,
+                kh as kh,
+                money as money,
+                sellId as sellId,
+                ysr as ysr,
+                note as note,
+                op as op,
+                shr as shr,
+                sh as sh,
+                inTime as inTime,
+                shTime as shTime
+        from goodback
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="backTime != null and backTime!=''">
+                    and backTime=#{backTime}
+                </if>
+                <if test="kh != null and kh!=''">
+                    and kh=#{kh}
+                </if>
+                <if test="money != null and money!=''">
+                    and money=#{money}
+                </if>
+                <if test="sellId != null and sellId!=''">
+                    and sellId=#{sellId}
+                </if>
+                <if test="ysr != null and ysr!=''">
+                    and ysr=#{ysr}
+                </if>
+                <if test="note != null and note!=''">
+                    and note=#{note}
+                </if>
+                <if test="op != null and op!=''">
+                    and op=#{op}
+                </if>
+                <if test="shr != null and shr!=''">
+                    and shr=#{shr}
+                </if>
+                <if test="sh != null and sh!=''">
+                    and sh=#{sh}
+                </if>
+                <if test="inTime != null and inTime!=''">
+                    and inTime=#{inTime}
+                </if>
+                <if test="shTime != null and shTime!=''">
+                    and shTime=#{shTime}
+                </if>
+        </trim>
+        <if test="beginPos != null and pageSize != null ">
+            limit #{beginPos},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getGoodbackCountByMap" resultType="Integer"  parameterType="java.util.Map">
+        select count(*) from goodback
+        <trim prefix="where" prefixOverrides="and | or">
+                <if test="id != null and id!=''">
+                    and id=#{id}
+                </if>
+                <if test="backTime != null and backTime!=''">
+                    and backTime=#{backTime}
+                </if>
+                <if test="kh != null and kh!=''">
+                    and kh=#{kh}
+                </if>
+                <if test="money != null and money!=''">
+                    and money=#{money}
+                </if>
+                <if test="sellId != null and sellId!=''">
+                    and sellId=#{sellId}
+                </if>
+                <if test="ysr != null and ysr!=''">
+                    and ysr=#{ysr}
+                </if>
+                <if test="note != null and note!=''">
+                    and note=#{note}
+                </if>
+                <if test="op != null and op!=''">
+                    and op=#{op}
+                </if>
+                <if test="shr != null and shr!=''">
+                    and shr=#{shr}
+                </if>
+                <if test="sh != null and sh!=''">
+                    and sh=#{sh}
+                </if>
+                <if test="inTime != null and inTime!=''">
+                    and inTime=#{inTime}
+                </if>
+                <if test="shTime != null and shTime!=''">
+                    and shTime=#{shTime}
+                </if>
+        </trim>
+    </select>
+
+    <insert id="insertGoodback" parameterType="com.zb.pojo.Goodback">
+        insert into goodback(
+                        backTime,
+                        kh,
+                        money,
+                        sellId,
+                        ysr,
+                        note,
+                        op,
+                        shr,
+                        sh,
+                        inTime,
+                        shTime)
+        values(
+                     #{backTime},
+                     #{kh},
+                     #{money},
+                     #{sellId},
+                     #{ysr},
+                     #{note},
+                     #{op},
+                     #{shr},
+                     #{sh},
+                     #{inTime},
+                    #{shTime})
+    </insert>
+
+    <update id="updateGoodback" parameterType="com.zb.pojo.Goodback">
+        update goodback
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+                        <if test="backTime != null and backTime!=''">
+                            backTime=#{backTime},
+                        </if>
+                        <if test="kh != null and kh!=''">
+                            kh=#{kh},
+                        </if>
+                        <if test="money != null and money!=''">
+                            money=#{money},
+                        </if>
+                        <if test="sellId != null and sellId!=''">
+                            sellId=#{sellId},
+                        </if>
+                        <if test="ysr != null and ysr!=''">
+                            ysr=#{ysr},
+                        </if>
+                        <if test="note != null and note!=''">
+                            note=#{note},
+                        </if>
+                        <if test="op != null and op!=''">
+                            op=#{op},
+                        </if>
+                        <if test="shr != null and shr!=''">
+                            shr=#{shr},
+                        </if>
+                        <if test="sh != null and sh!=''">
+                            sh=#{sh},
+                        </if>
+                        <if test="inTime != null and inTime!=''">
+                            inTime=#{inTime},
+                        </if>
+                        <if test="shTime != null and shTime!=''">
+                            shTime=#{shTime}
+                        </if>
+        </trim>
+    </update>
+</mapper>
